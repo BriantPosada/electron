@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD MongoDB</title>
+</head>
+<body>
+    <h1>CRUD con MongoDB</h1>
+
+    <!-- Formulario para crear un nuevo documento -->
+    <form id="crear-form">
+        <input type="text" id="crear-input" placeholder="Nuevo documento">
+        <button type="submit">Crear</button>
+    </form>
+
+    <!-- Lista para mostrar los documentos -->
+    <ul id="documentos-lista"></ul>
+
+    <!-- Formulario para actualizar un documento -->
+    <form id="actualizar-form" style="display:none;">
+        <input type="text" id="actualizar-input" placeholder="Actualizar documento">
+        <button type="submit">Actualizar</button>
+    </form>
+
+    <!-- Script para manejar las operaciones CRUD -->
+    <script src="renderer.js"></script>
+    <script src="mongo.js"></script>
+</body>
+</html>
