@@ -378,7 +378,23 @@
   </tbody>
 </table>
 
+<form action="/agregar-documento" method="POST">
+  <label for="fecha">Fecha.</label>
+  <input type="date" id="fecha" name="fecha" required><br>
+ 
+  <label for="precioBTC">Precio BTC</label>
+  <input type="number" step="0.0001" id="precioBTC" name="precioBTC" required><br>
+ 
+  <label for="precioCompra">Precio Compra</label>
+  <input type="number" step="0.0001" id="precioCompra" name="precioCompra" required><br>
+   
+  <label for="satoshi">Satoshis</label>
+  <input type="number" step="0.00000001" id="satoshis" name="satoshis" required><br>
 
+  <input type="submit" value="Agregar">
+
+
+</form>
 <!---
         <form id="formularioAgregar">
           <input type="text" id="nombre" placeholder="Nombre">

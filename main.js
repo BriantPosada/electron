@@ -4,6 +4,9 @@ const path = require('node:path');
 const express = require('express');
 const expressApp = express();
 const port = 3000;
+const http = require('http');
+const server = http.createServer(expressApp);
+
 const {MongoClient} = require('mongodb');
 
 expressApp.use(express.json());
@@ -42,6 +45,35 @@ expressApp.get('/documentos' , async (req , res) => {
 expressApp.listen(port, () => {
     console.log(`Servidor Express escuchando port: ${port}`);
 
+});
+
+expressApp.get('/agregar-documento',
+(req, res) => {
+    res.render('formulario-agregar');
+});
+
+expressApp.use(express.urlencoded({
+    extended: true }));
+
+    expressApp.post('/agregar-documento', 
+(req, res)=> {
+    const {fecha, precioBTC, precioCompra, satoshis} = req.body;
+    db.collection('/documentos').insertOne({
+        fecha,
+        precioBTC,
+        precioCompra,
+        satoshis
+    }
+, (err,results) => {
+    if (err) {
+        console.error('Error al insertar documento;', err);
+        res.status(500).send('Error al agregar Documento');
+    } else {
+        console.log('Documento insertado correctamente:', result.insertId);
+        res.redirect('/documentos');
+    }
+});
+res.send('Datos Recibidos Correctamente');
 });
 
 /* CRUD */
