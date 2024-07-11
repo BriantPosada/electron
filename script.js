@@ -257,27 +257,12 @@ INNER_SUB_MENUS_BTN.forEach(element => {
 
 // Guardar la selección de idioma en una cookie
 function guardarIdioma(idioma) {
-    var fechaExpiracion = new Date();
-    fechaExpiracion.setTime(fechaExpiracion.getTime() + (365*24*60*60*1000)); // 1 año
-    var expires = "expires="+ fechaExpiracion.toUTCString();
-    document.cookie = "idioma=" + idioma + ";" + expires + ";path=/";
+localStorage.setItem("idioma", idioma);
 }
 
 // Obtener la selección de idioma de las cookies
 function obtenerIdioma() {
-    var nombre = "idioma=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(nombre) == 0) {
-            return c.substring(nombre.length, c.length);
-        }
-    }
-    return "";
+return localStorage.getItem("idioma") || "";
 }
 
 // Función para cambiar el idioma y actualizar el contenido
@@ -296,7 +281,13 @@ function actualizarContenido(idioma) {
             more: "Más",
             lang: "Idioma",
             title: "Phi - DCA Placenteramente.",
-            date: "Fecha"
+            date: "Fecha",
+            save: "Guardar",
+            btc: "Direccion BTC:",
+            head: "Información de la dirección",
+            balance: "Error al consultar la dirección.",
+            transacciones: "Numero de transacciones:",
+            last: "Ultimas 5 Transacciones"
         },
         en: {
             home: "Home",
@@ -304,7 +295,13 @@ function actualizarContenido(idioma) {
             more: "More",
             lang: "Language",
             title: "Phi - DCA Pleasurably.",
-            date: "Date"
+            date: "Date",
+            save: "Save",
+            btc: "BTC Address:",
+            head: "Management Information:",
+            balancep: "Balance:",
+            transacciones: "Number of Transactions:",
+            last: "Last 5 Transactions:"
         },
         fr: {
             home: "Debut",
@@ -312,14 +309,26 @@ function actualizarContenido(idioma) {
             more: "Plus loin",
             lang: "Langage",
             title: "Phi - DCA Agreablement.",
-            date: "Date"
+            date: "Date",
+            save: "Sauvegarder",
+            btc: "Adresse BTC:",
+            head: "Informations de gestion :",
+            balancep: "Balance:",
+            transacciones: "Nombre de transactions:",
+            last: "5 dernières transactions"
         },
         jp: {
           home: "始める",
           edit: "編集",
           more: "さらに遠く",
           lang: "言語",
-          title: "Phi - DCA 楽しく."
+          title: "Phi - DCA 楽しく.",
+          save: "保つ",
+          btc: "BTCアドレス:",
+          head: "管理情報",
+          balancep: "秤：",
+          transacciones: "トランザクション数:",
+          last: "最後の 5 トランザクション"
         }
         // Añade más idiomas y traducciones aquí
     };
@@ -329,14 +338,20 @@ function actualizarContenido(idioma) {
     document.getElementById('edit').textContent = textos[idioma].edit;
     document.getElementById('more').textContent = textos[idioma].more;
     document.getElementById('lang').textContent = textos[idioma].lang;
-    document.getElementById('title').textContent = textos[idioma].title
+    document.getElementById('title').textContent = textos[idioma].title;
+    document.getElementById('save').textContent = textos[idioma].save;
+    document.getElementById('btc').textContent = textos[idioma].btc;
+    document.getElementById('head').textContent = textos[idioma].head;
+    document.getElementById('balancep').textContent = textos[idioma].balancep;
+    document.getElementById('transacciones').textContent = textos[idioma].transacciones;
+    document.getElementById('last').textContent = textos[idioma].last
 }
 
 // Al cargar la página, verificar si hay una selección de idioma guardada
-window.onload = function() {
+window.addEventListener('load', function() {
     var idiomaGuardado = obtenerIdioma();
-    if (idiomaGuardado != "") {
+    if (idiomaGuardado) {
         document.getElementById('selector-idioma').value = idiomaGuardado;
         actualizarContenido(idiomaGuardado);
     }
-};
+});

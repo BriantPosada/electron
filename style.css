@@ -2,7 +2,11 @@
   --scheme: light dark;
   color-scheme: var(--scheme);
 }
-
+@font-face {
+  font-family: san francisco;
+  src: url('./assets/SFProText-Light.ttf')
+  format('truetype');
+}
 .layout {
   z-index: 1;
 }
@@ -295,7 +299,7 @@
 body {
   margin: 0;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: 'san francisco', sans-serif;
   color: #3f4750;
   font-size: 0.9rem;
 }
